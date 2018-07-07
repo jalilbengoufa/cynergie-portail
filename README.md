@@ -1,8 +1,8 @@
 # cynergie-portail
 
-##Laravel 5.6
+## Laravel 5.6
 
-###Ce project rassemble ces modules:
+### Ce project rassemble ces modules:
 
 - Cynergie website
 - Cynergie portail
