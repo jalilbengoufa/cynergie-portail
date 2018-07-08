@@ -1,10 +1,23 @@
 # cynergie-portail
 
-## Laravel 5.6
+## Using Laravel 5.6 , Vuejs and  docker to deploy 
 
-### Ce project rassemble ces modules:
+### This project reassemble
 
 - Cynergie website
 - Cynergie portail
 - Cynergie data api
 
+#### Help
+
+- to run bash inside a docker container
+
+```
+docker exec -it cynergieportail bash
+```
+
+- to run a command in the container ; laravel exemple:
+
+```
+docker-compose exec cynergieportail php artisan list
+```

@@ -19,5 +19,12 @@
             </div>
         </div>
     </div>
+
+<counters-list>
+
+
+</counters-list>
 </div>
+
+
 @endsection

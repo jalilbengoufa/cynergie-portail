@@ -67,7 +67,8 @@ class DataController extends Controller
      */
     private function getDataMultipleDays($dataMultipleDays, $client)
     {
-
+        $prometheusUrl = "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
+        
         $prometheusData = $client->get($this->prometheusUrl);
         dd($prometheusData->getBody()->getContents());
 
