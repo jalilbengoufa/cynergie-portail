@@ -18,13 +18,13 @@
                     </div>
                 </div>
                 <counters-list
-                        :counters="{{$counters}}">
-                </counters-list>s
+                        :counters="{{$counters}}"
+                        filterurl="{{ route('filter') }}"
+                >
+                </counters-list>
             </div>
 
 
         </div>
     </div>
-
-
 @endsection

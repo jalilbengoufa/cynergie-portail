@@ -9,9 +9,8 @@ class DataController extends Controller
 {
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -19,6 +18,7 @@ class DataController extends Controller
         $date = $request->input('date');
         $from = $request->input('from');
         $to = $request->input('to');
+        $csv = (bool)$request->input('csv');
 
         if (isset($date) && $date !== null && $date !== "") {
 
@@ -28,6 +28,10 @@ class DataController extends Controller
             ]);
 
             $this->getDataDay($validatedData, $client);
+
+            if(isset($csv) && $csv){
+                $this->dataToCsv();
+            }
         }
 
         if (isset($from) && $from !== "" && isset($to) && $to !== "") {
@@ -40,7 +44,12 @@ class DataController extends Controller
 
             $this->getDataMultipleDays($validatedData, $client);
 
+            if(isset($csv) && $csv){
+                $this->dataToCsv();
+            }
+
         }
+
 
         return response()->json("bad parameters , verify and try again", 400);
 
@@ -48,7 +57,7 @@ class DataController extends Controller
 
     /**
      * @param $dataDay
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param $client
      */
     private function getDataDay($dataDay, $client)
     {
@@ -63,7 +72,7 @@ class DataController extends Controller
 
     /**
      * @param $dataMultipleDays
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param $client
      */
     private function getDataMultipleDays($dataMultipleDays, $client)
     {
