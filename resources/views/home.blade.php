@@ -20,6 +20,7 @@
                 <counters-list
                         :counters="{{$counters}}"
                         filterurl="{{ route('filter') }}"
+                        metricsurl="{{ route('metrics') }}"
                 >
                 </counters-list>
             </div>

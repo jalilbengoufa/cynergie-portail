@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Counter;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+
 
 class DataController extends Controller
 {
+    private $prometheusUrl = "http://0.0.0.0:3000/test.json";
 
     /**
      * @param Request $request
@@ -27,11 +32,14 @@ class DataController extends Controller
                 'date' => 'date|required',
             ]);
 
-            $this->getDataDay($validatedData, $client);
+           return response()->json($this->getDataDay($validatedData, $client)) ;
 
-            if(isset($csv) && $csv){
-                $this->dataToCsv();
-            }
+           /* if ( $filteredJson !== null) {
+
+                $this->dataToCsv($filteredJson);
+            }*/
+
+            return response()->json("empty json file , verify and try again", 400);;
         }
 
         if (isset($from) && $from !== "" && isset($to) && $to !== "") {
@@ -44,7 +52,7 @@ class DataController extends Controller
 
             $this->getDataMultipleDays($validatedData, $client);
 
-            if(isset($csv) && $csv){
+            if (isset($csv) && $csv) {
                 $this->dataToCsv();
             }
 
@@ -55,19 +63,45 @@ class DataController extends Controller
 
     }
 
+
+    /**help functions**/
+
     /**
      * @param $dataDay
      * @param $client
+     * @return mixed
      */
     private function getDataDay($dataDay, $client)
     {
+        $metrics = array();
+        // $prometheusData = $client->get($this->prometheusUrl);
+        // $prometheusJson = prometheusData->getBody()->getContents()
+        $requestJson = Request::create(route("prometheus"), "GET");
+        $prometheusJson = app()->handle($requestJson)->getContent();
+        $prometheusArray = json_decode($prometheusJson);
 
-        $prometheusUrl = "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
+        foreach ($prometheusArray->data->result as $result) {
 
-        $prometheusData = $client->get($this->prometheusUrl);
-        dd($prometheusData->getBody()->getContents());
+            $values = $result->values;
+            $metric = array();
 
-        // return view('home');
+            foreach ($values as $value) {
+
+                $metric["name"] = $result->metric->job;
+                $metric["value"] = $value[1];
+                $metric["time"] = $value[0];
+                array_push($metrics, $metric);
+            }
+
+
+        }
+
+        if (empty($metrics)) {
+            return false;
+        }
+
+        return json_encode($metrics);
+
     }
 
     /**
@@ -77,21 +111,18 @@ class DataController extends Controller
     private function getDataMultipleDays($dataMultipleDays, $client)
     {
         $prometheusUrl = "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
-        
-        $prometheusData = $client->get($this->prometheusUrl);
-        dd($prometheusData->getBody()->getContents());
 
-        //return view('home');
+        //$prometheusData = $client->get($this->prometheusUrl);
+        //dd($prometheusData->getBody()->getContents());
+
+
     }
 
     /**
-     * @param $data
-     * @return mixed
+     * @return string list of all controllers names
      */
-    private function dataToCsv($data)
+    public function getNames()
     {
-
-
-        return $data;
+        return Counter::all("name")->toJson(JSON_PRETTY_PRINT);
     }
 }

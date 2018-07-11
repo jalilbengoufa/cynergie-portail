@@ -17,4 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('electricdata', 'DataController@index');
+Route::get('/metrics', 'DataController@index')->name("metrics");
+Route::get('/controleurs', 'DataController@getNames');
+

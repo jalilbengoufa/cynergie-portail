@@ -47700,6 +47700,9 @@ module.exports = function normalizeComponent (
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
 //
 //
 //
@@ -47721,12 +47724,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "list",
     props: {
         counters: Array,
-        filterurl: String
+        filterurl: String,
+        metricsurl: String
     },
     data: function data() {
         return {
             allcounters: this.counters,
-            filtername: ""
+            filtername: "",
+            csvlink: "",
+            downloadname: "",
+            json: ""
         };
     },
 
@@ -47734,7 +47741,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         download: function download(name, id) {
 
-            alert("download of  " + name + "started");
+            var self = this;
+            axios.get(self.metricsurl + "/?counter=" + name + "&date=06-04-12").then(function (response) {
+                //console.log(response.data)
+
+                self.json = response.data;
+                self.convertTocsv();
+            }).catch(function (error) {
+                console.log(error.response.data);
+            });
         },
         filter: function filter() {
             var self = this;
@@ -47748,6 +47763,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error.response.data);
             });
+        },
+        convertTocsv: function convertTocsv(filename) {
+
+            var self = this;
+            var arrData = _typeof(self.json) != 'object' ? JSON.parse(self.json) : self.json;
+            var CSV = '';
+
+            for (var i = 0; i < arrData.length; i++) {
+                var row = "";
+
+                for (var index in arrData[i]) {
+
+                    if (index === "time") {
+                        row += arrData[i][index];
+                    } else {
+                        row += arrData[i][index] + ',';
+                    }
+                }
+
+                row.slice(0, row.length - 1);
+                CSV += row + ';';
+            }
+
+            if (CSV == '') {
+                alert("Invalid data");
+                return;
+            }
+
+            self.csvlink = 'data:text/csv;charset=utf-8,' + CSV;
+            ;
+            self.downloadname = filename + ".csv";
         }
     }
 
@@ -47804,6 +47850,12 @@ var render = function() {
               " ;\n            "
           ),
           _c("input", { attrs: { type: "date", placeholder: "enter date" } }),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: _vm.csvlink, download: _vm.downloadname } },
+            [_vm._v("Download link")]
+          ),
           _vm._v(" "),
           _c(
             "button",

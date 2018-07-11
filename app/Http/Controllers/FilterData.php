@@ -7,7 +7,7 @@ use App\Counter;
 
 class FilterData extends Controller
 {
-    public function index(Request $request)
+    public function __invoke(Request $request)
     {
         $counters = Counter::where('place', 'like', $request->get("filter") . '%')
             ->get();
