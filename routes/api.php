@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/metrics', 'DataController@index')->name("metrics");
-Route::get('/controleurs', 'DataController@getNames');
+Route::get('/metrics/names', 'DataController@getNames')->name("names");
 
