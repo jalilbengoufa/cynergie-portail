@@ -64719,6 +64719,25 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -64745,7 +64764,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             self = this;
 
                             for (i = 0; i < self.counters.length; i++) {
-                                counter = { index: i, name: self.counters[i].name, place: self.counters[i].place, json: "", jsonlink: "", csvlink: "", filenamecsv: "", filenamejson: "" };
+                                counter = {
+                                    index: i,
+                                    name: self.counters[i].name,
+                                    place: self.counters[i].place,
+                                    json: "",
+                                    jsonlink: "",
+                                    csvlink: "",
+                                    filenamecsv: "",
+                                    filenamejson: "",
+                                    date: ""
+                                };
 
                                 self.countersInfo.push(counter);
                             }
@@ -65645,64 +65674,102 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c(
-      "ul",
-      { attrs: { id: "counterslist" } },
-      _vm._l(_vm.countersInfo, function(counter) {
-        return _c("li", { key: counter.index }, [
-          _vm._v(
-            "\n            " +
-              _vm._s(counter.name) +
-              " ; " +
-              _vm._s(counter.place) +
-              " ;\n            "
-          ),
-          _c("input", { attrs: { type: "date", placeholder: "enter date" } }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              attrs: { id: counter.index },
-              on: {
-                click: function($event) {
-                  _vm.download(counter.place, counter.index)
-                }
-              }
-            },
-            [_vm._v("Generate file")]
-          ),
-          _vm._v(" "),
-          counter.filenamecsv !== ""
-            ? _c(
-                "a",
+    _c("table", { staticClass: "table   table-hover" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.countersInfo, function(counter) {
+          return _c("tr", { key: counter.index }, [
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(" " + _vm._s(counter.index))
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(" " + _vm._s(counter.place) + " ;")]),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
                 {
-                  attrs: {
-                    href: counter.csvlink,
-                    download: counter.filenamecsv
+                  staticClass: "bg-danger",
+                  attrs: { id: counter.index },
+                  on: {
+                    click: function($event) {
+                      _vm.download(counter.place, counter.index)
+                    }
                   }
                 },
-                [_vm._v("CSV")]
+                [_vm._v("Generate\n\n                ")]
               )
-            : _vm._e(),
-          _vm._v(" "),
-          counter.filenamecsv !== ""
-            ? _c(
-                "a",
-                {
-                  attrs: {
-                    href: counter.jsonlink,
-                    download: counter.filenamejson
-                  }
-                },
-                [_vm._v("JSON")]
-              )
-            : _vm._e()
-        ])
-      })
-    )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              counter.filenamecsv !== ""
+                ? _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: counter.csvlink,
+                        download: counter.filenamecsv
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-download fa-2x" })]
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              counter.filenamecsv !== ""
+                ? _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: counter.jsonlink,
+                        download: counter.filenamejson
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-download fa-2x" })]
+                  )
+                : _vm._e()
+            ])
+          ])
+        })
+      )
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Controller")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Generate")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Csv files")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Json files")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("input", { attrs: { type: "date", placeholder: "enter date" } })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
