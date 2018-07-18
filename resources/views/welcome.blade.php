@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -6,11 +7,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="/manifest.webmanifest">
         <title>Cynergie</title>
-        <link rel="stylesheet" href="css/style-min.css" media="screen" >
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style-min.css')}}" media="screen" >
         <link rel='shortcut icon' href='http://cedille.etsmtl.ca/favicon.ico' type='image/x-icon' />
-        <link rel="stylesheet" href="css/animate-min.css" media="screen" >
+        <link rel="stylesheet" href="{{ asset('css/animate-min.css')}}" media="screen" >
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
+    <div id="app">
                 <section  class="hero  is-info is-large is-bold  ">
                     <div class="hero-head ">
                         <nav class="navbar  is-fixed-top  ">
@@ -18,7 +29,6 @@
                                 <div class="navbar-brand ">
                                     <a class="navbar-item" href="/">
                                         <picture>
-                                            <source srcset='img/jpeg2000/TypeScript.jp2' type='image/jp2'>
                                             <img src="img/cynergie-logo-white.png"  alt="Logo">
                                         </picture>
 
@@ -54,8 +64,9 @@
                                                 @auth
                                                     <a class="navbar-item" href="{{ url('/home') }}">Home</a>
                                                 @else
-                                                    <a class="navbar-item" href="{{ route('login') }}">Login</a>
-                                                    <a class="navbar-item" href="{{ route('register') }}">Register</a>
+                                                <auth></auth>
+{{--                                                    <a class="navbar-item" href="{{ route('login') }}">Login</a>
+                                                    <a class="navbar-item" href="{{ route('register') }}">Register</a>--}}
                                                 @endauth
 
                                         @endif
@@ -79,7 +90,17 @@
                             </h1>
                             <h2 class="subtitle home animated flipInX">
                                 Consommation énergétique en temps réel
+                            </h2>
+                            <b-btn v-b-modal.myModal>Show Modal</b-btn>
 
+                            <!-- Using value -->
+                            <b-btn v-b-modal="'myModal'">Show Modal</b-btn>
+
+                            <!-- the modal -->
+                            <b-modal id="myModal">
+                                Hello From My Modal!
+                            </b-modal>
+                        {{--    <auth> </auth>--}}
                         </div>
 
                     </div>
@@ -438,12 +459,13 @@
                     </div>
                 </footer>
 
-                <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-                <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
-                <script src="js/main.js" ></script>
-                <script src="js/progressbar.js" ></script>
-                <script src="js/jquery-3.3.1.min.js" ></script>
-                <script src="js/bootstrap.min.js" ></script>
 
+    </div>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}" media="screen" >
+    <script src="{{ asset('js/main.js')}}" ></script>
+    <script src="{{ asset('js/progressbar.js')}}" ></script>
+    <script src="{{ asset('js/jquery-3.3.1.min.js')}}" ></script>
+    <script src="{{ asset('js/bootstrap.min.js')}}" ></script>
     </body>
 </html>
