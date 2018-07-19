@@ -1,7 +1,7 @@
 @charset "utf-8";
 
-@import "../../node_modules/bulma/sass/utilities/initial-variables";
-@import "../../node_modules/bulma/bulma";
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/bulma";
 
 
 
@@ -30,11 +30,11 @@ $technologie: linear-gradient(to right, #e6522c, #d8694d);
 
 
 #resumer {
-    background-image: url("../img/dust_scratches.png");
+    background-image: url("/public/img/dust_scratches.png");
 }
 
 #resumer {
-    background-image: url("../img/webP/dust_scratches.webp");
+    background-image: url("/public/img/webP/dust_scratches.webp");
 }
 
 #tileText1 {
@@ -79,7 +79,7 @@ $technologie: linear-gradient(to right, #e6522c, #d8694d);
 }
 
 .backgroundNode {
-    background-image: url("../img/squairy_light.png");
+    background-image: url("/public/img/squairy_light.png");
     background-color: #ffffff;
     font-size: 128%;
     text-align: left;
@@ -89,7 +89,7 @@ $technologie: linear-gradient(to right, #e6522c, #d8694d);
 }
 
 .backgroundApi {
-    background-image: url("../img/squairy_light.png");
+    background-image: url("/public/img/squairy_light.png");
     background-color: #ffffff;
     font-size: 128%;
     text-align: left;
@@ -109,11 +109,11 @@ $technologie: linear-gradient(to right, #e6522c, #d8694d);
 
 
 .section.is-medium {
-    background-image: url("../img/subtle_dots.png");
+    background-image: url("/public/img/subtle_dots.png");
 }
 
 .grafana {
-    background-image: url("../img/grafana.png");
+    background-image: url("/public/img/grafana.png");
     text-align: left;
     color: white;
     font-size: 128%;
@@ -151,8 +151,8 @@ $technologie: linear-gradient(to right, #e6522c, #d8694d);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: “FlipH”;
+    //filter: FlipH;
+    //-ms-filter: “FlipH”;
 }
 
 #container {
