@@ -20129,8 +20129,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue__["a" /* default */]);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('counters-list', __webpack_require__(215));
-//Vue.component('auth', require('./components/Auth.vue'));
-
 
 var app = new Vue({
   el: '#app'
@@ -64796,17 +64794,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     methods: {
 
-        download: function download(name, index) {
+        download: function download(name, index, date) {
 
             var self = this;
-            axios.get(self.metricsurl + "/?counter=" + name + "&date=06-04-12").then(function (response) {
-                self.countersInfo[index].json = response.data;
-                self.countersInfo[index].jsonlink = "data:text/json;charset=utf-8," + self.countersInfo[index].json;
-                self.countersInfo[index].filenamejson = name + "-" + new Date().toLocaleTimeString() + ".json";
-                self.convertTocsv(name, index);
-            }).catch(function (error) {
-                console.log(error.response.data);
-            });
+
+            if (date !== "") {
+
+                axios.get(self.metricsurl + "/?counter=" + name + "&date=" + date).then(function (response) {
+                    self.countersInfo[index].json = response.data;
+                    self.countersInfo[index].jsonlink = "data:text/json;charset=utf-8," + self.countersInfo[index].json;
+                    self.countersInfo[index].filenamejson = name + "-" + new Date().toLocaleTimeString() + ".json";
+                    self.convertTocsv(name, index);
+                }).catch(function (error) {
+                    console.log(error.response.data);
+                });
+            }
         },
         filter: function filter() {
             var self = this;
@@ -64822,8 +64824,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             });
         },
         convertTocsv: function convertTocsv(name, id) {
-
             var self = this;
+
             var arrData = _typeof(self.countersInfo[id].json) !== 'object' ? JSON.parse(self.countersInfo[id].json) : self.countersInfo[id].json;
             var CSV = '';
 
@@ -64832,15 +64834,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 for (var index in arrData[i]) {
 
-                    if (index === "time") {
-                        row += arrData[i][index];
-                    } else {
-                        row += arrData[i][index] + ',';
-                    }
-                }
+                    if (row != '') row += ',';
 
-                row.slice(0, row.length - 1);
-                CSV += row + ';';
+                    row += arrData[i][index];
+                }
+                CSV += row + '%0D%0A';
             }
 
             if (CSV == '') {
@@ -65645,35 +65643,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container", attrs: { id: "list" } }, [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.filtername,
-          expression: "filtername"
-        }
-      ],
-      attrs: {
-        id: "filter",
-        name: "filter",
-        type: "text",
-        placeholder: "filter with name"
-      },
-      domProps: { value: _vm.filtername },
-      on: {
-        keyup: function($event) {
-          _vm.filter()
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.filtername = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
     _c("table", { staticClass: "table   table-hover" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -65687,7 +65656,32 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(" " + _vm._s(counter.place) + " ;")]),
             _vm._v(" "),
-            _vm._m(1, true),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.countersInfo[counter.index].date,
+                    expression: "countersInfo[counter.index].date"
+                  }
+                ],
+                attrs: { type: "date", placeholder: "enter date" },
+                domProps: { value: _vm.countersInfo[counter.index].date },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.countersInfo[counter.index],
+                      "date",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
             _c("td", [
               _c(
@@ -65697,7 +65691,11 @@ var render = function() {
                   attrs: { id: counter.index },
                   on: {
                     click: function($event) {
-                      _vm.download(counter.place, counter.index)
+                      _vm.download(
+                        counter.place,
+                        counter.index,
+                        _vm.countersInfo[counter.index].date
+                      )
                     }
                   }
                 },
@@ -65759,14 +65757,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Json files")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", { attrs: { type: "date", placeholder: "enter date" } })
     ])
   }
 ]

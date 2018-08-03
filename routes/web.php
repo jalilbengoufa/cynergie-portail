@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/grafana', function () {
+    $url = "http://0.0.0.0:3000";
+    return Redirect::to($url);
+});
 
 Auth::routes();
 

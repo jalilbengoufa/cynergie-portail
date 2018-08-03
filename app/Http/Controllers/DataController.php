@@ -10,7 +10,7 @@ use App\Helpers\Filter;
 
 class DataController extends Controller
 {
-    private $prometheusUrl = "http://0.0.0.0:3000/test.json";
+    private $prometheusUrl = "http://0.0.0.0:9090/api/v1/";
 
     /**
      * @param Request $request
@@ -30,7 +30,7 @@ class DataController extends Controller
                 'date' => 'date|required',
             ]);
 
-           return response()->json(Filter::getDataDay($validatedData, $client)) ;
+           return response()->json(Filter::getDataDay($validatedData, $client,$this->prometheusUrl)) ;
 
         }
 
@@ -42,11 +42,7 @@ class DataController extends Controller
                 'to' => 'date|required',
             ]);
 
-            $this->getDataMultipleDays($validatedData, $client);
-
-            if (isset($csv) && $csv) {
-                $this->dataToCsv();
-            }
+            return response()->json(Filter::getDataDay($validatedData, $client)) ;
 
         }
 

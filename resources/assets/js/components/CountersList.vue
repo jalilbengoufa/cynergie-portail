@@ -1,7 +1,5 @@
 <template>
     <div id="list" class="container">
-        <input id="filter" name="filter" v-model="filtername" type="text" v-on:keyup="filter()"
-               placeholder="filter with name"/>
         <table class="table   table-hover">
             <thead class="thead-dark">
             <tr>
@@ -17,15 +15,17 @@
             <tr v-for="counter in countersInfo" :key="counter.index">
                 <th scope="row"> {{counter.index}}</th>
                 <td> {{ counter.place }} ;</td>
-                <td><input type="date" placeholder="enter date"/></td>
+                <td><input type="date" v-model="countersInfo[counter.index].date" placeholder="enter date"/></td>
                 <td>
-                    <button class="bg-danger" style="" :id="counter.index" v-on:click="download(counter.place, counter.index)">Generate
+                    <button class="bg-danger" style="" :id="counter.index"
+                            v-on:click="download(counter.place, counter.index,countersInfo[counter.index].date)">Generate
 
                     </button>
                 </td>
-                <td ><a :href="counter.csvlink" :download="counter.filenamecsv" v-if="counter.filenamecsv!==''"><i class="fas fa-download fa-2x"></i></a>
+                <td><a :href="counter.csvlink" :download="counter.filenamecsv" v-if="counter.filenamecsv!==''"><i
+                        class="fas fa-download fa-2x"></i></a>
                 </td>
-                <td ><a :href="counter.jsonlink" :download="counter.filenamejson"
+                <td><a :href="counter.jsonlink" :download="counter.filenamejson"
                        v-if="counter.filenamecsv!==''"><i class="fas fa-download fa-2x"></i></a></td>
             </tr>
             </tbody>
@@ -70,10 +70,14 @@
         },
         methods: {
 
-            download: function (name, index) {
+            download: function (name, index,date) {
 
                 var self = this;
-                axios.get(self.metricsurl + "/?counter=" + name + "&date=06-04-12")
+
+            if(date!==""){
+
+
+                axios.get(self.metricsurl + "/?counter=" + name + "&date="+date)
                     .then(response => {
                         self.countersInfo[index].json = response.data;
                         self.countersInfo[index].jsonlink = "data:text/json;charset=utf-8," + self.countersInfo[index].json;
@@ -83,7 +87,7 @@
                     .catch(error => {
                         console.log(error.response.data);
                     });
-
+            }
 
             },
             filter: function () {
@@ -105,8 +109,8 @@
                     });
             },
             convertTocsv: function (name, id) {
-
                 var self = this;
+
                 var arrData = typeof self.countersInfo[id].json !== 'object' ? JSON.parse(self.countersInfo[id].json) : self.countersInfo[id].json;
                 var CSV = '';
 
@@ -115,16 +119,12 @@
 
                     for (var index in arrData[i]) {
 
-                        if (index === "time") {
-                            row += arrData[i][index];
-                        } else {
-                            row += arrData[i][index] + ',';
-                        }
+                        if (row != '') row += ','
+
+                        row += arrData[i][index];
 
                     }
-
-                    row.slice(0, row.length - 1);
-                    CSV += row + ';';
+                    CSV += row + '%0D%0A';
                 }
 
                 if (CSV == '') {

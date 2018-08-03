@@ -17,7 +17,6 @@ Vue.use(BootstrapVue);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('counters-list', require('./components/CountersList.vue'));
-//Vue.component('auth', require('./components/Auth.vue'));
 
 
 const app = new Vue({
