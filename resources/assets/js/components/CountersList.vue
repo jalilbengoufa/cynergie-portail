@@ -5,6 +5,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Controller</th>
+                <th scope="col">Address</th>
                 <th scope="col">Date</th>
                 <th scope="col">Generate</th>
                 <th scope="col">Csv files</th>
@@ -14,11 +15,12 @@
             <tbody>
             <tr v-for="counter in countersInfo" :key="counter.index">
                 <th scope="row"> {{counter.index}}</th>
-                <td> {{ counter.place }} ;</td>
+                <td> {{ counter.name }} </td>
+                <td> {{ counter.address }} </td>
                 <td><input type="date" v-model="countersInfo[counter.index].date" placeholder="enter date"/></td>
                 <td>
                     <button class="bg-danger" style="" :id="counter.index"
-                            v-on:click="download(counter.place, counter.index,countersInfo[counter.index].date)">Generate
+                            v-on:click="download(counter.name, counter.index,countersInfo[counter.index].date)">Generate
 
                     </button>
                 </td>
@@ -56,7 +58,7 @@
                 var counter = {
                     index: i,
                     name: self.counters[i].name,
-                    place: self.counters[i].place,
+                    address: self.counters[i].address,
                     json: "",
                     jsonlink: "",
                     csvlink: "",

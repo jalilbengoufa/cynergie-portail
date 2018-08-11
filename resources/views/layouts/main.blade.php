@@ -9,10 +9,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/styles.css')}}" media="screen">
+    <link rel="stylesheet" href="css/styles.css" media="screen">
     <link rel='shortcut icon' href='http://cedille.etsmtl.ca/favicon.ico' type='image/x-icon'/>
-    <link rel="stylesheet" href="{{ asset('css/animate-min.css')}}" media="screen">
-    <link rel="stylesheet" href="{{ asset('css/app.css')}}" media="screen">
+    <link rel="stylesheet" href="css/animate-min.css" media="screen">
+    <link rel="stylesheet" href="css/app.css" media="screen">
 
 
 </head>
@@ -22,11 +22,11 @@
 
 <!-- Scripts -->
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<script src="{{ asset('js/main.js')}}"></script>
-<script src="{{ asset('js/progressbar.js')}}"></script>
-<script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
-<script src="{{ asset('js/bootstrap.min.js')}}"></script>
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="js/main.js"></script>
+<script src="js/progressbar.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js" defer></script>
 
 
 </body>
