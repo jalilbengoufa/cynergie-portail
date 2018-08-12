@@ -8,6 +8,26 @@
 - Cynergie portail
 - Cynergie data api
 
+
+###Deployment
+
+- Change laravel environment file name and add the production variables
+
+```
+mv .env.example .env
+```
+
+- Build the laravel website image (takes time)
+
+```
+docker-compose build
+```
+- run the containers by default the website is binded to `localhost:8000`
+
+```
+docker-compose up -d
+```
+
 #### Help
 
 - to run bash inside a docker container
@@ -22,7 +42,7 @@ docker exec -it cynergieportail bash
 docker-compose exec cynergieportail php artisan list
 ```
 
-- to run a migration for database ; laravel exemple:
+- to run a migration for database ; laravel example:
 
 ```
 docker-compose run laravel php artisan migrate
