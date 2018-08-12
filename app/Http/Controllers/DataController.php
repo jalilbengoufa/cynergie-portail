@@ -10,7 +10,7 @@ use App\Helpers\Filter;
 
 class DataController extends Controller
 {
-    private $prometheusUrl = "http://0.0.0.0:9090/api/v1/";
+    private $prometheusUrl = "192.168.0.1:9090/api/v1/";
 
     /**
      * @param Request $request

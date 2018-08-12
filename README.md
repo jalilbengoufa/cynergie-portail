@@ -21,3 +21,9 @@ docker exec -it cynergieportail bash
 ```
 docker-compose exec cynergieportail php artisan list
 ```
+
+- to run a migration for database ; laravel exemple:
+
+```
+docker-compose run laravel php artisan migrate
+```

@@ -34,17 +34,16 @@
                     <a class="navbar-item" href="#contact">
                         Contact
                     </a>
-                    <a class="navbar-item" href="{{ url('/grafana') }}">
+                    <a class="navbar-item" href="/grafana">
                         Grafana
                     </a>
                     @if (Route::has('login'))
                         @auth
-                            <a class="navbar-item" href="{{ url('/home') }}">Home</a>
+                            <a class="navbar-item" href="/home">Home</a>
                         @else
                             <a class="navbar-item" v-b-modal.login>Login</a>
                             <a class="navbar-item" v-b-modal.register>Register</a>
-                            {{--                                                <a class="navbar-item" href="{{ route('login') }}">Login</a>
-                                                                                <a class="navbar-item" href="{{ route('register') }}">Register</a>--}}
+
                         @endauth
 
                     @endif
