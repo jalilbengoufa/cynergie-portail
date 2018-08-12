@@ -1,7 +1,7 @@
 <b-modal id="login" size="lg" title="Login" body-bg-variant="light" header-bg-variant="success"
          header-text-variant="white" centered hide-footer lazy>
 
-    <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+    <form method="POST" action="/login" aria-label="{{ __('Login') }}">
         @csrf
 
         <div class="form-group row">

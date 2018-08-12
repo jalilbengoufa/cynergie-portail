@@ -7,7 +7,7 @@ services:
     build: .
     # apache is running on port 80 but we want to expose this to port 4000 on our local machine
     ports:
-      - "4000:80"
+      - "8000:80"
     # we depending on the mysql backend
     depends_on:
       - mysql
