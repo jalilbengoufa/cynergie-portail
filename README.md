@@ -9,7 +9,7 @@
 - Cynergie data api
 
 
-###Deployment
+### Deployment
 
 - Change laravel environment file name and add the production variables
 
