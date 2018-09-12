@@ -64736,6 +64736,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -64765,7 +64767,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 counter = {
                                     index: i,
                                     name: self.counters[i].name,
-                                    place: self.counters[i].place,
+                                    address: self.counters[i].address,
                                     json: "",
                                     jsonlink: "",
                                     csvlink: "",
@@ -65654,7 +65656,9 @@ var render = function() {
               _vm._v(" " + _vm._s(counter.index))
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v(" " + _vm._s(counter.place) + " ;")]),
+            _c("td", [_vm._v(" " + _vm._s(counter.name) + " ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(" " + _vm._s(counter.address) + " ")]),
             _vm._v(" "),
             _c("td", [
               _c("input", {
@@ -65692,7 +65696,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       _vm.download(
-                        counter.place,
+                        counter.name,
                         counter.index,
                         _vm.countersInfo[counter.index].date
                       )
@@ -65748,6 +65752,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Controller")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Address")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
         _vm._v(" "),

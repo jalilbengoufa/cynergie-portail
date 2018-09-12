@@ -1,4 +1,4 @@
-# cynergie-portail
+# cynergie-portail (not update to date please use this repo [cynegie](https://github.com/ClubCedille/cynergie-web))
 
 ## Using Laravel 5.6 , Vuejs and  docker to deploy 
 
@@ -7,6 +7,26 @@
 - Cynergie website
 - Cynergie portail
 - Cynergie data api
+
+
+### Deployment
+
+- Change laravel environment file name and add the production variables
+
+```
+mv .env.example .env
+```
+
+- Build the laravel website image (takes time)
+
+```
+docker-compose build
+```
+- run the containers by default the website is binded to `localhost:8000`
+
+```
+docker-compose up -d
+```
 
 #### Help
 
@@ -20,4 +40,10 @@ docker exec -it cynergieportail bash
 
 ```
 docker-compose exec cynergieportail php artisan list
+```
+
+- to run a migration for database ; laravel example:
+
+```
+docker-compose run laravel php artisan migrate
 ```

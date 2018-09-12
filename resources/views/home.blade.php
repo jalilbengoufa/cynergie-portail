@@ -9,8 +9,7 @@
             <div class="row justify-content-center">
                 <counters-list
                         :counters="{{$counters}}"
-                        filterurl="{{ route('filter') }}"
-                        metricsurl="{{ route('metrics') }}"
+                        metricsurl="https://cynergie.cedille.club/api/metrics"
                 >
                 </counters-list>
             </div>
