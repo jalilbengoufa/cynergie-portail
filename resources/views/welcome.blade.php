@@ -16,9 +16,9 @@
 
         </div>
     </section>
-    @include('auth.login')
+    {{--@include('auth.login')e
 
-    @include('auth.register')
+    @include('auth.register')--}}
 
     @include('sections.resume')
 

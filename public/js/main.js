@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 228);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 228:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(229);
+module.exports = __webpack_require__(54);
 
 
 /***/ }),
 
-/***/ 229:
+/***/ 54:
 /***/ (function(module, exports) {
 
 // progressbar.js@1.0.0 version is used
